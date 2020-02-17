@@ -15,8 +15,11 @@ name: 'particle'
 ```
 * After you created the required input file, you can train your model.
 ```python
-python3 object_detection/legacy/train.py --logtostderr --pipeline_config_path=/faster_rcnn_resnet101.config  --train_dir=
+python3 object_detection/legacy/train.py --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_kali_png.config  --train_dir=
 ```
+* After training the model, you can get bounding box coordinates by running particle_detection.ipynb.
+
+
 
 # Particle regression
 * You can train particle regression by running the following command:
