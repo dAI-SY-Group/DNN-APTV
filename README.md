@@ -43,7 +43,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
    ```
  * The `train_config` defines parts of the training process in our case:
    ```
-   train_config: {
+    train_config: {
      batch_size: 2
      #replicas_to_aggregate: 2
      batch_queue_capacity:1
@@ -82,7 +82,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
 
 
 * After you created the required input file, you can train your model.
-```bash
+```
 python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_kali.config  --train_dir=
 ```
 
