@@ -27,12 +27,12 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
     python3 generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
 ```
 * The dataset (TFRecord files) and its corresponding label map. Example of how to create label maps can be found in the folder data.
-```
-item {
-id: 1
-name: 'particle'
-}
-```
+  ```
+  item {
+  id: 1
+    name: 'particle'
+  }
+  ```
 * Configuring the Particle Detection Training Pipeline in the file `faster_rcnn_resnet101_kali.config'
  * input configuration looks as follows:
    ```
@@ -93,4 +93,4 @@ python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_ka
 * You can train particle regression by running the following command:
 ```bash
     python3 train_regression_pos.py
-```
+```    
