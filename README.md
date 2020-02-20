@@ -94,6 +94,7 @@ python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_ka
 ```bash
     python3 particle_crop.py
 ```
+
 * You can train particle regression by running the following command:
 ```bash
     python3 train_regression_pos.py
