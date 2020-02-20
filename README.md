@@ -78,7 +78,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
      }
    }
   ```
- * In order to speed up the training process, it is recommended to reuse the pre-existing object detection checkpoint. The pre-trained checkpoints can be found [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md).
+ * In order to speed up the training process, it is recommended to reuse the pre-existing object detection checkpoint. The pre-trained checkpoints can be found [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
 
 
 * After you created the required input file, you can train your model.
