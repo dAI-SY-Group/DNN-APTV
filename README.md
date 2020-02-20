@@ -2,7 +2,7 @@
 Sources to our paper on using deep learning for particle depth regression in fluids
 
 ## Dependencies
-Particle regression depends in the following libraries:
+Particle regression depends on the following libraries:
 *   Protobuf 3.0.0
 *   Python-tk
 *   Pillow 1.0
