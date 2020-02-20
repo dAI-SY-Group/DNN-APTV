@@ -1,7 +1,7 @@
 """
 Usage:
   # From tensorflow/models/
-  # In otfrt to create train data:
+  # In order to create train data:
   python generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
   # In order to create test data:
   python generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=test.record
