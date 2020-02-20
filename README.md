@@ -34,14 +34,14 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
   }
   ```
 * Configuring the Particle Detection Training Pipeline in the file `faster_rcnn_resnet101_kali.config`
- * input configuration looks as follows:
+  * input configuration looks as follows:
    ```
    tf_record_input_reader {
      input_path: "/data/train.record"
    }
    label_map_path: "/data/particle_classes_label_map.pbtxt"
    ```
- * The `train_config` defines parts of the training process in our case:
+  * The `train_config` defines parts of the training process in our case:
    ```
     train_config: {
      batch_size: 2
@@ -78,7 +78,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
      }
    }
   ```
- * In order to speed up the training process, it is recommended to reuse the pre-existing object detection checkpoint. The pre-trained checkpoints can be found [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
+  * In order to speed up the training process, it is recommended to reuse the pre-existing object detection checkpoint. The pre-trained checkpoints can be found [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
 
 
 * After you created the required input file, you can train your model.
