@@ -1,9 +1,9 @@
 """
 Usage:
   # From tensorflow/models/
-  # Create train data:
+  # In otfrt to create train data:
   python generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
-  # Create test data:
+  # In order to create test data:
   python generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=test.record
 """
 from __future__ import division
@@ -26,12 +26,10 @@ flags.DEFINE_string('image_dir', '', 'Path to images')
 FLAGS = flags.FLAGS
 
 
-# TO-DO replace this with label map
+
 def class_text_to_int(row_label):
-    if row_label == 'particle5':
+    if row_label == 'particle':
         return 1
-    if row_label == 'particle2.5':
-        return 2
     else:
         return 0
 

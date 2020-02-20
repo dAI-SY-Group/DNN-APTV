@@ -1,3 +1,14 @@
+# Copyright 2020 TU Ilmenau. All Rights Reserved.
+#
+# Code for the Particle regression baseline for the
+# On the use of a cascaded convolutional neural network for three-dimensional flow measurements using astigmatic PTV task.
+
+# ==============================================================================
+
+
+
+
+
 import math
 import subprocess
 

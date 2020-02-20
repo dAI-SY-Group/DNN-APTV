@@ -1,24 +1,29 @@
+# Copyright 2020 TU Ilmenau. All Rights Reserved.
+#
+# Code for the Particle regression baseline for the
+# On the use of a cascaded convolutional neural network for three-dimensional flow measurements using astigmatic PTV task.
+
+# ==============================================================================
+
+
 import numpy as np
 import pandas as pd
 from keras import Model
 from keras.applications.densenet import DenseNet121, DenseNet169, DenseNet201
 from keras.applications.inception_v3 import InceptionV3, preprocess_input
-from keras.applications.resnet50 import ResNet50
 from keras.callbacks import ModelCheckpoint, CSVLogger
 from keras.callbacks import ReduceLROnPlateau
 from keras.layers import Input, Dense, concatenate
 from keras.optimizers import Adam, RMSprop, Nadam
 from keras.utils import Progbar
 from keras_preprocessing.image import ImageDataGenerator
-#from efficientnet import EfficientNetB0
+
 from data_loader_regression_pos_z import multi_input_data_gen, get_git_revision_hash, get_class_form_data, \
     LearningRateExponentialDecay
 
 # Training parameters
-backbone = 'inceptionv3'  # densenet121,densenet169,densenet201,inceptionv3
-#backbone = 'efficientnetb2'  # densenet121,densenet169,densenet201,inceptionv3,resnet50
-#backbone = 'densenet201'  # densenet121,densenet169,densenet201,inceptionv3,resnet50
-optimizer = 'adam'  # adam, rmsprop
+backbone = 'inceptionv3'
+optimizer = 'adam'
 loss = 'mae'
 batch_size = 64
 learning_rate = 0.01
@@ -26,18 +31,10 @@ data_augmentation = True
 epochs = 200
 image_HWC = (221, 221, 3)
 
-if backbone == 'efficientnetb2':
-    learning_rate = 0.016 * (batch_size / 256.)
 
-model_name = 'regression_kali5_0-60_train_lr0001_model_%s_train_bs%d_%s_lr%s_%s_pos' % (backbone, batch_size, learning_rate, optimizer, loss)
+model_name = 'regression_kali_0-60_train_lr0001_model_%s_train_bs%d_%s_lr%s_%s_pos' % (backbone, batch_size, learning_rate, optimizer, loss)
 model_save_path = '%s.hdf5' % model_name
 log_save_path = '%s-train-%s.log' % (model_name, get_git_revision_hash())
-if backbone == 'densenet121':
-    BACKBONE = DenseNet121
-elif backbone == 'densenet169':
-    BACKBONE = DenseNet169
-elif backbone == 'densenet201':
-    BACKBONE = DenseNet201
 elif backbone == 'inceptionv3':
     BACKBONE = InceptionV3
 elif backbone == 'resnet50':
@@ -49,39 +46,29 @@ elif backbone == 'efficientnetb2':
 
 if optimizer == 'adam':
     OPTIMIZER = Adam
-elif optimizer == 'nadam':
-    OPTIMIZER = Nadam
-elif optimizer == 'rmsprop':
-    OPTIMIZER = RMSprop
-
 noAugGen = ImageDataGenerator(rescale=1. / 255,samplewise_center=True,samplewise_std_normalization=True,)
+
 # Load data.
 if data_augmentation:
     genImg = ImageDataGenerator(
         rescale=1. / 255,
         samplewise_center=True,
         samplewise_std_normalization=True,
-        # randomly rotate images in the range (deg 0 to 180)
-        # rotation_range=0.1,
-        # randomly shift images horizontally
         width_shift_range=0.01,
-        # randomly shift images vertically
         height_shift_range=0.01,
-        # randomly flip images
-        #horizontal_flip=True,
-        # vertical_flip=True,
         brightness_range=[0.9, 1.1]
     )
 else:
     genImg = ImageDataGenerator(rescale=1. / 255)
-# genImg.flow_from_dataframe()
-image_dir_train = 'pngkali5train'
-image_dir_val = 'pngkali5val'
-image_dir_test = 'pngkali5test'
 
-train_gen = multi_input_data_gen(genImg, 'csv/kali5_train_regression.csv', image_dir_train,filter_border=100,color_mode='rgb',filter_range=1)
-val_gen = multi_input_data_gen(noAugGen, 'csv/kali5_val_regression.csv', image_dir_val,filter_border=100,color_mode='rgb',filter_range=1)
-test_gen_all = multi_input_data_gen(noAugGen, 'csv/kali5_test_regression.csv', image_dir_test, shuffle=False,filter_border=100,color_mode='rgb')
+# genImg.flow_from_dataframe()
+image_dir_train = ''
+image_dir_val = ''
+image_dir_test = ''
+
+train_gen = multi_input_data_gen(genImg, '', image_dir_train,filter_border=100,color_mode='rgb',filter_range=1)
+val_gen = multi_input_data_gen(noAugGen, '', image_dir_val,filter_border=100,color_mode='rgb',filter_range=1)
+test_gen_all = multi_input_data_gen(noAugGen, '', image_dir_test, shuffle=False,filter_border=100,color_mode='rgb')
 
 
 # Build model.
@@ -101,8 +88,7 @@ model.summary()
 checkpoint = ModelCheckpoint(filepath=model_save_path, monitor='val_loss', verbose=1, save_best_only=True)
 lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1), cooldown=0, patience=5, min_lr=0.5e-6)
 train_logger = CSVLogger(log_save_path)
-# 'learning_rate_decay_factor': 0.94,
-# 'num_epochs_per_decay': 2.4,
+
 num_epochs_per_decay = 2.4
 step_decay = len(train_gen) * num_epochs_per_decay
 lr_exp = LearningRateExponentialDecay(0.94, step_decay)
@@ -154,4 +140,4 @@ model.load_weights(model_save_path)
 y_test, y_pred ,in_data_x,in_data_y  = predict_on_model(test_gen_all)
 print('TestData all mae: {0}.'.format(np.mean(np.abs(np.squeeze(y_pred) - y_test))))
 data = pd.DataFrame({'posx':np.squeeze(in_data_x),'posy':np.squeeze(in_data_y),'y_ground_truth': np.squeeze(y_test), 'y_pred': np.squeeze(y_pred)})
-data.to_csv('ygt_ypred_test_0-60_rmsprop_lr0001_efficientnb2_bs256_kalimix_with_position.csv')
+data.to_csv('')
