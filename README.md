@@ -85,6 +85,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
 ```bash
 python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_kali.config  --train_dir=
 ```
+
 * After training the model, you can get bounding box coordinates by running `particle_detection_bb.ipynb`.
 
 
