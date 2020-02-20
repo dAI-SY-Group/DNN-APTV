@@ -21,13 +21,13 @@ Particle regression depends on the following libraries:
 *   tqdm==4.31.1
 
 For detailed steps to install Tensorflow and Tensorflow object Detection API, follow the [Tensorflow installation instructions](https://www.tensorflow.org/install/) and [Tensorflow object Detection Insatallation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md)
-## particle detection
+## Particle detection
 * In order to generate TFRecord file format, you need to convert your dataset to this file format.
 ```bash
     python3 generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
 ```
 * The dataset (TFRecord files) and its corresponding label map. Example of how to create label maps can be found in the folder data.
-```python
+```
 item {
 id: 1
 name: 'particle'
@@ -35,24 +35,24 @@ name: 'particle'
 ```
 * Configuring the Particle Detection Training Pipeline in the file `faster_rcnn_resnet101_kali.config'
  * input configuration looks as follows:
- ```
-tf_record_input_reader {
-  input_path: "/data/train.record"
-}
-label_map_path: "/data/particle_classes_label_map.pbtxt"
-```
+   ```
+   tf_record_input_reader {
+     input_path: "/data/train.record"
+   }
+   label_map_path: "/data/particle_classes_label_map.pbtxt"
+   ```
  * The `train_config` defines parts of the training process in our case:
- ```
- train_config: {
-   batch_size: 2
-   #replicas_to_aggregate: 2
-   batch_queue_capacity:1
-   num_batch_queue_threads: 1
-   prefetch_queue_capacity: 1
-   optimizer {
-     momentum_optimizer: {
-       learning_rate: {
-         manual_step_learning_rate {
+   ```
+   train_config: {
+     batch_size: 2
+     #replicas_to_aggregate: 2
+     batch_queue_capacity:1
+     num_batch_queue_threads: 1
+     prefetch_queue_capacity: 1
+     optimizer {
+       momentum_optimizer: {
+         learning_rate: {
+           manual_step_learning_rate {
            initial_learning_rate: 0.0003
            schedule {
              step: 900000
@@ -61,23 +61,23 @@ label_map_path: "/data/particle_classes_label_map.pbtxt"
            schedule {
              step: 1200000
              learning_rate: .000003
+             }
            }
          }
-       }
        momentum_optimizer_value: 0.9
+       }
+      use_moving_average: false
      }
-     use_moving_average: false
-   }
-   gradient_clipping_by_norm: 10.0
- fine_tune_checkpoint: ""
-   from_detection_checkpoint: true
-   num_steps: 1500000
-   data_augmentation_options {
-     random_horizontal_flip {
+     gradient_clipping_by_norm: 10.0
+   fine_tune_checkpoint: ""
+     from_detection_checkpoint: true
+     num_steps: 1500000
+     data_augmentation_options {
+       random_horizontal_flip {
+       }
      }
    }
- }
-```
+  ```
  * In order to speed up the training process, it is recommended to reuse the pre-existing object detection checkpoint. The pre-trained checkpoints can be found [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md).
 
 
