@@ -33,7 +33,7 @@ For detailed steps to install Tensorflow and Tensorflow object Detection API, fo
     name: 'particle'
   }
   ```
-* Configuring the Particle Detection Training Pipeline in the file `faster_rcnn_resnet101_kali.config'
+* Configuring the Particle Detection Training Pipeline in the file `faster_rcnn_resnet101_kali.config`
  * input configuration looks as follows:
    ```
    tf_record_input_reader {
