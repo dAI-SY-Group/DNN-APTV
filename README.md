@@ -90,6 +90,10 @@ python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_ka
 
 
 # Particle regression
+* Before you train the particle regression model you should crop the particle images to 180 x 180 fixed size images.
+```bash
+    python3 particle_crop.py
+```
 * You can train particle regression by running the following command:
 ```bash
     python3 train_regression_pos.py
