@@ -50,7 +50,6 @@ This implementation is based on [Tensorflow object Detection Installation instru
 ```
 
 * You can train particle regression by running the following command in [particle_regression](particle_regression).
-```bash:
 ```bash
     python3 train_regression_pos.py
 ```
