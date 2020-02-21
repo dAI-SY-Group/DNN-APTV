@@ -44,12 +44,12 @@ This implementation is based on [Tensorflow object Detection Installation instru
 
 
 # Particle regression
-* Before you train the particle regression model you should crop the particle images to 180 x 180 fixed size images. In [particle_regression](particle_regression)
+* Before you train the particle regression model you should crop the particle images to 180 x 180 fixed size images. In [particle_regression](particle_regression):
 ```bash
     python3 particle_crop.py
 ```
 
-* You can train particle regression by running the following command in [particle_regression](particle_regression)
+* You can train particle regression by running the following command in [particle_regression](particle_regression).
 ```bash:
 ```bash
     python3 train_regression_pos.py
