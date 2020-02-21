@@ -35,9 +35,9 @@ This implementation is based on [Tensorflow object Detection Installation instru
 
 
 * After you created the required input file, in `research/object_detection` you can train your model.
-```bash
-python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_kali.config  --train_dir=
-```
+  ```bash
+  python3 train.py  --logtostderr --pipeline_config_path=/faster_rcnn_resnet101_kali.config  --train_dir=
+  ```
 
 * After training the model, you can get bounding box coordinates by running `particle_detection_bb.ipynb`.
 
