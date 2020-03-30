@@ -1,5 +1,18 @@
-# Particle Regression
-Sources to our paper on using deep learning for particle depth regression in fluids
+# Astigmatic Particle Tracking Velocimetry (APTV) using a Deep Neural Network (DNN)
+Source code of the DNN used in: "On the use of a cascaded convolutional neural network for three-dimensional flow measurements using astigmatic PTV"
+DOI: https://doi.org/10.1088/1361-6501/ab7bfd
+
+Please cite as:
+
+``` 
+@article{10.1088/1361-6501/ab7bfd,
+	author={Joerg Koenig and Minqian Chen and Wiebke Rösing and David Boho and Patrick Mäder and Christian Cierpka},
+	title={On the use of a cascaded convolutional neural network for three-dimensional flow measurements using astigmatic PTV},
+	journal={Measurement Science and Technology},
+	url={http://iopscience.iop.org/10.1088/1361-6501/ab7bfd},
+	year={2020}
+}
+```
 
 ## Dependencies
 Particle regression depends on the following libraries:
